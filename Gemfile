@@ -40,6 +40,7 @@ group :development, :test do
   gem 'pry'
   gem 'simplecov', require: false
   gem 'shoulda-matchers'
+  gem 'webmock'
 end
 
 group :development do
