@@ -2,6 +2,7 @@
 require 'simplecov'
 SimpleCov.start 'rails'
 require 'spec_helper'
+require 'webmock/rspec'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -68,4 +69,13 @@ Shoulda::Matchers.configure do |config|
     with.test_framework :rspec
     with.library :rails
   end
+end
+
+def stub_google_geocode_api_call
+  get_coordinates = File.read("./fixtures/coordinates.json")
+  stub_request(:get, "https://maps.googleapis.com/maps/api/geocode/json?address=Denver,CO&key=#{ENV["GOOGLE_MAPS_API_KEY"]}").to_return(status:200, body:get_coordinates)
+end
+def stub_dark_sky_api_call
+  get_forecast = File.read("./fixtures/forecast.json")
+  stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").to_return(status:200, body:get_forecast)
 end
