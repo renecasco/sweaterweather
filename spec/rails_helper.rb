@@ -70,3 +70,8 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+def stub_google_geocode_api_call
+  get_coordinates = File.read("./fixtures/coordinates.json")
+  stub_request(:get, "https://maps.googleapis.com/maps/api/geocode/json?address=Denver,CO&key=AIzaSyAPaITNwjrAmcw6mygl_5zKZgfp_XJqtUY").to_return(status:200, body:get_coordinates)
+end
