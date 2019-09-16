@@ -7,7 +7,7 @@ class DarkSkyService
 
     response = conn.get("/forecast/#{ENV["DARK_SKY_API_KEY"]}/#{location}")
 
-    forecast_data = JSON.parse(response.body, symbolize_names: true)
+    JSON.parse(response.body, symbolize_names: true)
   end
 
 end

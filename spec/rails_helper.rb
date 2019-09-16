@@ -73,5 +73,9 @@ end
 
 def stub_google_geocode_api_call
   get_coordinates = File.read("./fixtures/coordinates.json")
-  stub_request(:get, "https://maps.googleapis.com/maps/api/geocode/json?address=Denver,CO&key=AIzaSyAPaITNwjrAmcw6mygl_5zKZgfp_XJqtUY").to_return(status:200, body:get_coordinates)
+  stub_request(:get, "https://maps.googleapis.com/maps/api/geocode/json?address=Denver,CO&key=#{ENV["GOOGLE_MAPS_API_KEY"]}").to_return(status:200, body:get_coordinates)
+end
+def stub_dark_sky_api_call
+  get_forecast = File.read("./fixtures/forecast.json")
+  stub_request(:get, "https://api.darksky.net/forecast/#{ENV["DARK_SKY_API_KEY"]}/39.7392358,-104.990251").to_return(status:200, body:get_forecast)
 end
