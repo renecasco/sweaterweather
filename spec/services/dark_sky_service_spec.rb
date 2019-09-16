@@ -7,7 +7,7 @@ describe "DarkSkyService" do
         # WebMock.allow_net_connect!
         stub_google_geocode_api_call
         stub_dark_sky_api_call
-        
+
         location = GoogleGeocodeService.new("Denver,CO").get_coordinates
         service = DarkSkyService.new
         forecast_data = service.get_forecast(location)
